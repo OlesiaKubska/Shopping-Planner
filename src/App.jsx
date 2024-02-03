@@ -1,28 +1,44 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "./App.module.scss";
 import AddProducts from "./components/AddProducts/AddProducts";
 import ProductsFilters from "./components/ProductsFilters/ProductsFilters";
 import ProductsList from "./components/ProductsList/ProductsList";
 import ShoppingList from "./components/ShoppingList/ShoppingList";
-import produkty from "../src/common/consts/produkty";
+import products from "./common/consts/products";
 
 function App() {
  const [shoppingList, setShoppingList] = useState([]);
+ const [filteredProducts, setFilteredProducts] = useState(products);
+ const [filter, setFilter] = useState({ name: "", category: "" });
 
- const addToShoppingList = (nazwa) => {
-  setShoppingList((prev) => [...prev, nazwa]);
+ useEffect(() => {
+  const filtered = products.filter((product) => {
+   return (
+    (filter.name ? product.name.includes(filter.name) : true) &&
+    (filter.category ? product.category === filter.category : true)
+   );
+  });
+
+  setFilteredProducts(filtered);
+ }, [filter]);
+
+ const addToShoppingList = (name) => {
+  setShoppingList((prev) => [...prev, name]);
  };
 
- const removeFromShoppingList = (nazwa) => {
-  setShoppingList((prev) => prev.filter((item) => item !== nazwa));
+ const removeFromShoppingList = (name) => {
+  setShoppingList((prev) => prev.filter((item) => item !== name));
  };
 
  return (
   <div className={styles.appWrapper}>
    <AddProducts />
-   <ProductsFilters />
+   <ProductsFilters setFilter={setFilter} />
    <div className={styles.columnsWrapper}>
-    <ProductsList produkty={produkty} addToShoppingList={addToShoppingList} />
+    <ProductsList
+     products={filteredProducts}
+     addToShoppingList={addToShoppingList}
+    />
     <ShoppingList
      shoppingList={shoppingList}
      removeFromShoppingList={removeFromShoppingList}

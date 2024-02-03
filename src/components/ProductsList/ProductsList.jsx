@@ -1,15 +1,15 @@
 import PropTypes from "prop-types";
 import commonColumnsStyles from "../../common/styles/Columns.module.scss";
 
-function ProductsList({ produkty, addToShoppingList }) {
+function ProductsList({ products, addToShoppingList }) {
  return (
   <div className={commonColumnsStyles.App}>
    <header className={commonColumnsStyles.AppHeader}>
     <p>Products list</p>
     <ul>
-     {produkty.map((produkt, index) => (
-      <li key={index} onClick={() => addToShoppingList(produkt.nazwa)}>
-       {produkt.nazwa}
+     {products.map((product, index) => (
+      <li key={index} onClick={() => addToShoppingList(product.name)}>
+       {product.name}
       </li>
      ))}
     </ul>
@@ -19,7 +19,7 @@ function ProductsList({ produkty, addToShoppingList }) {
 }
 
 ProductsList.propTypes = {
- produkty: PropTypes.array.isRequired,
+ products: PropTypes.array.isRequired,
  addToShoppingList: PropTypes.func.isRequired,
 };
 
