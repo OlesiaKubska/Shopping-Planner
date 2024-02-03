@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import categories from "../../common/consts/categories";
-import styles from "./ProductsFilters.module.scss";
+import commonColumnsStyles from "../../common/styles/Columns.module.scss";
+// import styles from "./ProductsFilters.module.scss";
 
 function ProductsFilters({ setFilter }) {
  const [nameFilter, setNameFilter] = useState("");
@@ -18,7 +19,7 @@ function ProductsFilters({ setFilter }) {
  }, [nameFilter, categoryFilter, isFoodOnly, setFilter]);
 
  return (
-  <div className={styles.FiltersWrapper}>
+  <div className={commonColumnsStyles.AppHeader}>
    <div>Products Filters</div>
    <input
     type="text"

@@ -1,9 +1,12 @@
 .appWrapper {
- display: flex;
- flex-direction: column;
+ display: grid;
+ grid-template-columns: 1fr 1fr;
+ gap: 20px;
+ padding: 20px;
+ margin: 0 auto;
 }
 
-.columnsWrapper {
- display: flex;
- height: calc(100vh - 100px);
-}
+// .columnsWrapper {
+//  display: flex;
+//  height: calc(100vh - 100px);
+// }

@@ -41,16 +41,15 @@ function App() {
   <div className={styles.appWrapper}>
    <AddProducts />
    <ProductsFilters setFilter={setFilter} />
-   <div className={styles.columnsWrapper}>
-    <ProductsList
-     products={filteredProducts}
-     addToShoppingList={addToShoppingList}
-    />
-    <ShoppingList
-     shoppingList={shoppingList}
-     removeFromShoppingList={removeFromShoppingList}
-    />
-   </div>
+
+   <ProductsList
+    products={filteredProducts}
+    addToShoppingList={addToShoppingList}
+   />
+   <ShoppingList
+    shoppingList={shoppingList}
+    removeFromShoppingList={removeFromShoppingList}
+   />
   </div>
  );
 }
