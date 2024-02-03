@@ -9,13 +9,20 @@ import products from "./common/consts/products";
 function App() {
  const [shoppingList, setShoppingList] = useState([]);
  const [filteredProducts, setFilteredProducts] = useState(products);
- const [filter, setFilter] = useState({ name: "", category: "" });
+ const [filter, setFilter] = useState({
+  name: "",
+  category: "",
+  isFoodOnly: false,
+ });
 
  useEffect(() => {
   const filtered = products.filter((product) => {
    return (
-    (filter.name ? product.name.includes(filter.name) : true) &&
-    (filter.category ? product.category === filter.category : true)
+    (filter.name
+     ? product.name.toLowerCase().includes(filter.name.toLowerCase())
+     : true) &&
+    (filter.category ? product.category === filter.category : true) &&
+    (!filter.isFoodOnly || (filter.isFoodOnly && product.foodProduct))
    );
   });
 
