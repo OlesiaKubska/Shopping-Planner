@@ -7,8 +7,13 @@ export const ProductsContext = createContext();
 export const ProductsProvider = ({ children }) => {
  const [products, setProducts] = useState(initialProducts);
 
- const addProduct = (product) => {
-  setProducts([...products, product]);
+ const addProduct = (newProduct) => {
+  setProducts((prevProducts) => {
+   const updatedProducts = [...prevProducts, newProduct];
+   console.log("Dodano produkt:", newProduct);
+   console.log("Zaktualizowana lista produktów:", updatedProducts);
+   return updatedProducts;
+  });
  };
 
  return (

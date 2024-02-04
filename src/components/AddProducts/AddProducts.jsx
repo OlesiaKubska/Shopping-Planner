@@ -1,8 +1,6 @@
 import { useState, useContext } from "react";
 // import styles from "../../common/styles/Headers.module.scss";
 import commonColumnsStyles from "../../common/styles/Columns.module.scss";
-
-// Załóżmy, że masz context o nazwie ProductsContext do zarządzania stanem produktów
 import { ProductsContext } from "../../context/ProductsContext";
 
 function AddProducts() {
@@ -10,11 +8,10 @@ function AddProducts() {
  const [category, setCategory] = useState("");
  const [isFoodProduct, setIsFoodProduct] = useState(false);
 
- const { addProduct } = useContext(ProductsContext); // Funkcja dodająca produkt
+ const { addProduct } = useContext(ProductsContext);
 
  const handleSubmit = (event) => {
-  event.preventDefault(); // Zapobieganie domyślnemu zachowaniu formularza
-  // Dodaj produkt do listy
+  event.preventDefault();
   addProduct({
    name,
    category,

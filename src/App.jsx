@@ -29,12 +29,20 @@ function App() {
   setFilteredProducts(filtered);
  }, [filter]);
 
- const addToShoppingList = (name) => {
-  setShoppingList((prev) => [...prev, name]);
+ const addToShoppingList = (productName) => {
+  setShoppingList((prev) => [...prev, { name: productName, purchased: false }]);
  };
 
- const removeFromShoppingList = (name) => {
-  setShoppingList((prev) => prev.filter((item) => item !== name));
+ const removeFromShoppingList = (index) => {
+  setShoppingList((prev) => prev.filter((_, idx) => idx !== index));
+ };
+
+ const togglePurchased = (index) => {
+  setShoppingList((currentList) =>
+   currentList.map((item, idx) =>
+    idx === index ? { ...item, purchased: !item.purchased } : item
+   )
+  );
  };
 
  return (
@@ -49,6 +57,7 @@ function App() {
    <ShoppingList
     shoppingList={shoppingList}
     removeFromShoppingList={removeFromShoppingList}
+    togglePurchased={togglePurchased}
    />
   </div>
  );

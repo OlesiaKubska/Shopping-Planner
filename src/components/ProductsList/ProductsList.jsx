@@ -1,7 +1,11 @@
+import { useContext } from "react";
 import PropTypes from "prop-types";
 import commonColumnsStyles from "../../common/styles/Columns.module.scss";
+import { ProductsContext } from "../../context/ProductsContext";
 
-function ProductsList({ products, addToShoppingList }) {
+function ProductsList({ addToShoppingList }) {
+ const { products } = useContext(ProductsContext);
+ //  console.log("Produkty do wyświetlenia:", products);
  return (
   <div className={commonColumnsStyles.App}>
    <header className={commonColumnsStyles.AppHeader}>
@@ -9,7 +13,7 @@ function ProductsList({ products, addToShoppingList }) {
     <ul>
      {products.map((product, index) => (
       <li key={index} onClick={() => addToShoppingList(product.name)}>
-       {product.name}
+       {`${product.name}`}
       </li>
      ))}
     </ul>
