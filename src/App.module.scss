@@ -1,12 +1,8 @@
 .appWrapper {
  display: grid;
- grid-template-columns: 1fr 1fr;
- gap: 20px;
- padding: 20px;
+ grid-template-columns: repeat(2, 1fr);
+ gap: 5px;
+ padding: 10px;
+ max-width: 1440px;
  margin: 0 auto;
 }
-
-// .columnsWrapper {
-//  display: flex;
-//  height: calc(100vh - 100px);
-// }

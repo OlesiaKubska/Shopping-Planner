@@ -25,8 +25,8 @@ function AddProducts() {
 
  return (
   <div className={commonColumnsStyles.AppHeader}>
-   <h2>Add products</h2>
-   <form onSubmit={handleSubmit}>
+   <h3>Add products</h3>
+   <form className={commonColumnsStyles.Form} onSubmit={handleSubmit}>
     <input
      type="text"
      placeholder="Name"

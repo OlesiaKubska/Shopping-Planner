@@ -4,26 +4,23 @@ import commonColumnsStyles from "../../common/styles/Columns.module.scss";
 import { ProductsContext } from "../../context/ProductsContext";
 
 function ProductsList({ addToShoppingList }) {
- const { products } = useContext(ProductsContext);
- //  console.log("Produkty do wyświetlenia:", products);
+ const { filteredProducts } = useContext(ProductsContext);
+
  return (
-  <div className={commonColumnsStyles.App}>
-   <header className={commonColumnsStyles.AppHeader}>
-    <p>Products list</p>
-    <ul>
-     {products.map((product, index) => (
-      <li key={index} onClick={() => addToShoppingList(product.name)}>
-       {`${product.name}`}
-      </li>
-     ))}
-    </ul>
-   </header>
+  <div className={commonColumnsStyles.AppHeader}>
+   <h3>Products list</h3>
+   <ul className={commonColumnsStyles.List}>
+    {filteredProducts.map((product, index) => (
+     <li key={index} onClick={() => addToShoppingList(product.name)}>
+      {`${product.name}`}
+     </li>
+    ))}
+   </ul>
   </div>
  );
 }
 
 ProductsList.propTypes = {
- products: PropTypes.array.isRequired,
  addToShoppingList: PropTypes.func.isRequired,
 };
 

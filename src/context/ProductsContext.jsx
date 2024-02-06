@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 import initialProducts from "../common/consts/products";
 
 export const ProductsContext = createContext();
@@ -6,6 +6,26 @@ export const ProductsContext = createContext();
 // eslint-disable-next-line react/prop-types
 export const ProductsProvider = ({ children }) => {
  const [products, setProducts] = useState(initialProducts);
+ const [filteredProducts, setFilteredProducts] = useState(products);
+ const [filter, setFilter] = useState({
+  name: "",
+  category: "",
+  isFoodOnly: false,
+ });
+
+ useEffect(() => {
+  //   console.log("Updating filters:", filter);
+  const filtered = products.filter((product) => {
+   return (
+    (filter.name
+     ? product.name.toLowerCase().includes(filter.name.toLowerCase())
+     : true) &&
+    (filter.category ? product.category === filter.category : true) &&
+    (!filter.isFoodOnly || (filter.isFoodOnly && product.foodProduct))
+   );
+  });
+  setFilteredProducts(filtered);
+ }, [filter, products]);
 
  const addProduct = (newProduct) => {
   setProducts((prevProducts) => {
@@ -17,7 +37,9 @@ export const ProductsProvider = ({ children }) => {
  };
 
  return (
-  <ProductsContext.Provider value={{ products, addProduct }}>
+  <ProductsContext.Provider
+   value={{ products, addProduct, filteredProducts, setFilter }}
+  >
    {children}
   </ProductsContext.Provider>
  );

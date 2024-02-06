@@ -1,33 +1,15 @@
-import { useState, useEffect } from "react";
+import { useState, useContext } from "react";
 import styles from "./App.module.scss";
 import AddProducts from "./components/AddProducts/AddProducts";
 import ProductsFilters from "./components/ProductsFilters/ProductsFilters";
 import ProductsList from "./components/ProductsList/ProductsList";
 import ShoppingList from "./components/ShoppingList/ShoppingList";
-import products from "./common/consts/products";
+import { ProductsContext } from "./context/ProductsContext";
 
 function App() {
  const [shoppingList, setShoppingList] = useState([]);
- const [filteredProducts, setFilteredProducts] = useState(products);
- const [filter, setFilter] = useState({
-  name: "",
-  category: "",
-  isFoodOnly: false,
- });
 
- useEffect(() => {
-  const filtered = products.filter((product) => {
-   return (
-    (filter.name
-     ? product.name.toLowerCase().includes(filter.name.toLowerCase())
-     : true) &&
-    (filter.category ? product.category === filter.category : true) &&
-    (!filter.isFoodOnly || (filter.isFoodOnly && product.foodProduct))
-   );
-  });
-
-  setFilteredProducts(filtered);
- }, [filter]);
+ const { setFilter } = useContext(ProductsContext);
 
  const addToShoppingList = (productName) => {
   setShoppingList((prev) => [...prev, { name: productName, purchased: false }]);
@@ -49,11 +31,7 @@ function App() {
   <div className={styles.appWrapper}>
    <AddProducts />
    <ProductsFilters setFilter={setFilter} />
-
-   <ProductsList
-    products={filteredProducts}
-    addToShoppingList={addToShoppingList}
-   />
+   <ProductsList addToShoppingList={addToShoppingList} />
    <ShoppingList
     shoppingList={shoppingList}
     removeFromShoppingList={removeFromShoppingList}

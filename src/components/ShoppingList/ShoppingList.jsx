@@ -7,25 +7,23 @@ function ShoppingList({
  togglePurchased,
 }) {
  return (
-  <div className={commonColumnsStyles.App}>
-   <header className={commonColumnsStyles.AppHeader}>
-    <p>Shopping List</p>
-    <ul>
-     {shoppingList.map((item, index) => (
-      <li
-       key={index}
-       style={{ textDecoration: item.purchased ? "line-through" : "none" }}
-       onContextMenu={(event) => {
-        event.preventDefault();
-        togglePurchased(index);
-       }}
-       onClick={() => removeFromShoppingList(index)}
-      >
-       {item.name}
-      </li>
-     ))}
-    </ul>
-   </header>
+  <div className={commonColumnsStyles.AppHeader}>
+   <h3>Shopping List</h3>
+   <ul className={commonColumnsStyles.List}>
+    {shoppingList.map((item, index) => (
+     <li
+      key={index}
+      style={{ textDecoration: item.purchased ? "line-through" : "none" }}
+      onContextMenu={(event) => {
+       event.preventDefault();
+       togglePurchased(index);
+      }}
+      onClick={() => removeFromShoppingList(index)}
+     >
+      {item.name}
+     </li>
+    ))}
+   </ul>
   </div>
  );
 }
