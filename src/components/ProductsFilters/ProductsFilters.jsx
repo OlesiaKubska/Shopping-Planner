@@ -17,6 +17,12 @@ function ProductsFilters({ setFilter }) {
   }));
  }, [nameFilter, categoryFilter, isFoodOnly, setFilter]);
 
+ const resetFilters = () => {
+  setNameFilter("");
+  setCategoryFilter("");
+  setIsFoodOnly(false);
+ };
+
  return (
   <div className={commonColumnsStyles.AppHeader}>
    <h3>Products Filters</h3>
@@ -46,6 +52,9 @@ function ProductsFilters({ setFilter }) {
      />
      Food Product
     </label>
+    <button type="button" onClick={resetFilters}>
+     Reset
+    </button>
    </div>
   </div>
  );

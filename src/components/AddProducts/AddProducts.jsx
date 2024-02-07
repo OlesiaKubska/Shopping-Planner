@@ -1,5 +1,4 @@
 import { useState, useContext } from "react";
-// import styles from "../../common/styles/Headers.module.scss";
 import commonColumnsStyles from "../../common/styles/Columns.module.scss";
 import { ProductsContext } from "../../context/ProductsContext";
 
@@ -12,15 +11,19 @@ function AddProducts() {
 
  const handleSubmit = (event) => {
   event.preventDefault();
-  addProduct({
-   name,
-   category,
-   foodProduct: isFoodProduct,
-  });
-  // Resetowanie stanów
-  setName("");
-  setCategory("");
-  setIsFoodProduct(false);
+  if (name.trim() && category.trim()) {
+   addProduct({
+    name,
+    category,
+    foodProduct: isFoodProduct,
+   });
+   // Resetowanie stanów
+   setName("");
+   setCategory("");
+   setIsFoodProduct(false);
+  } else {
+   alert("Please fill in all fields.");
+  }
  };
 
  return (

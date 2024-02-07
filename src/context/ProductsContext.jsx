@@ -5,7 +5,10 @@ export const ProductsContext = createContext();
 
 // eslint-disable-next-line react/prop-types
 export const ProductsProvider = ({ children }) => {
- const [products, setProducts] = useState(initialProducts);
+ const [products, setProducts] = useState(() => {
+  const localProducts = localStorage.getItem("products");
+  return localProducts ? JSON.parse(localProducts) : initialProducts;
+ });
  const [filteredProducts, setFilteredProducts] = useState(products);
  const [filter, setFilter] = useState({
   name: "",
@@ -27,11 +30,15 @@ export const ProductsProvider = ({ children }) => {
   setFilteredProducts(filtered);
  }, [filter, products]);
 
+ useEffect(() => {
+  localStorage.setItem("products", JSON.stringify(products));
+ }, [products]);
+
  const addProduct = (newProduct) => {
   setProducts((prevProducts) => {
    const updatedProducts = [...prevProducts, newProduct];
-   console.log("Dodano produkt:", newProduct);
-   console.log("Zaktualizowana lista produktów:", updatedProducts);
+   //    console.log("Dodano produkt:", newProduct);
+   //    console.log("Zaktualizowana lista produktów:", updatedProducts);
    return updatedProducts;
   });
  };

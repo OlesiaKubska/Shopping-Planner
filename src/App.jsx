@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import styles from "./App.module.scss";
 import AddProducts from "./components/AddProducts/AddProducts";
 import ProductsFilters from "./components/ProductsFilters/ProductsFilters";
@@ -7,9 +7,16 @@ import ShoppingList from "./components/ShoppingList/ShoppingList";
 import { ProductsContext } from "./context/ProductsContext";
 
 function App() {
- const [shoppingList, setShoppingList] = useState([]);
+ const [shoppingList, setShoppingList] = useState(() => {
+  const saved = localStorage.getItem("shoppingList");
+  return saved ? JSON.parse(saved) : [];
+ });
 
  const { setFilter } = useContext(ProductsContext);
+
+ useEffect(() => {
+  localStorage.setItem("shoppingList", JSON.stringify(shoppingList));
+ }, [shoppingList]);
 
  const addToShoppingList = (productName) => {
   setShoppingList((prev) => [...prev, { name: productName, purchased: false }]);
@@ -27,6 +34,11 @@ function App() {
   );
  };
 
+ const clearShoppingList = () => {
+  setShoppingList([]);
+  localStorage.removeItem("shoppingList");
+ };
+
  return (
   <div className={styles.appWrapper}>
    <AddProducts />
@@ -36,6 +48,7 @@ function App() {
     shoppingList={shoppingList}
     removeFromShoppingList={removeFromShoppingList}
     togglePurchased={togglePurchased}
+    clearShoppingList={clearShoppingList}
    />
   </div>
  );
