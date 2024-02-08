@@ -5,7 +5,7 @@ Shopping-Planner is an educational project designed to explore the use of React 
 ## Technologies
 - React: Utilizes hooks (useState, useEffect, useContext) for managing component states and global state.
 - Vite: Efficient project building and development with support for hot module replacement.
-- SCSS Modules: Local styling of components using CSS Modules for style isolation.
+- SCSS Modules: Local styling of components using SCSS Modules for style isolation.
 ## Features
 - Adding Products: Users can add products to the list, specifying the name, category, and whether the product is a food item.
 - Product Filtering: Products can be filtered by name, category, or food characteristics.
