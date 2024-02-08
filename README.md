@@ -3,10 +3,10 @@
 Shopping-Planner is an educational project designed to explore the use of React hooks and integration with Vite. The project allows users to plan their shopping by adding products to a shopping list, managing categories, and filtering products by various criteria.
 
 ## Technologies
-- React: Utilizes hooks (useState, useEffect, useContext) for managing component states and global state.
-- React Context API: Utilizes createContext and useContext hooks to manage and share global state across components without prop drilling. This is particularly useful for managing the products list, shopping list, and categories dynamically across the application.
-- Vite: Efficient project building and development with support for hot module replacement.
-- SCSS Modules: Local styling of components using SCSS Modules for style isolation.
+- **React**: Utilizes hooks (useState, useEffect, useContext) for managing component states and global state.
+- **React Context API**: Utilizes createContext and useContext hooks to manage and share global state across components without prop drilling. This is particularly useful for managing the products list, shopping list, and categories dynamically across the application.
+- **Vite**: Efficient project building and development with support for hot module replacement.
+- **SCSS Modules**: Local styling of components using SCSS Modules for style isolation.
 ## State Management and Context
 The application's state management strategy revolves around the React Context API to provide a global state that can be accessed by any component within the app. Here's how it is implemented:
 - **Creating a Context for Products**
