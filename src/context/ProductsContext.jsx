@@ -1,5 +1,6 @@
 import { createContext, useState, useEffect } from "react";
 import initialProducts from "../common/consts/products";
+import initialCategories from "../common/consts/categories";
 
 export const ProductsContext = createContext();
 
@@ -8,6 +9,10 @@ export const ProductsProvider = ({ children }) => {
  const [products, setProducts] = useState(() => {
   const localProducts = localStorage.getItem("products");
   return localProducts ? JSON.parse(localProducts) : initialProducts;
+ });
+ const [categories, setCategories] = useState(() => {
+  const localCategories = localStorage.getItem("categories");
+  return localCategories ? JSON.parse(localCategories) : initialCategories;
  });
  const [filteredProducts, setFilteredProducts] = useState(products);
  const [filter, setFilter] = useState({
@@ -32,6 +37,16 @@ export const ProductsProvider = ({ children }) => {
 
  useEffect(() => {
   localStorage.setItem("products", JSON.stringify(products));
+
+  const updatedCategories = [
+   ...new Set([
+    ...products.map((product) => product.category),
+    ...initialCategories,
+   ]),
+  ].sort();
+
+  setCategories(updatedCategories);
+  localStorage.setItem("categories", JSON.stringify(updatedCategories));
  }, [products]);
 
  const addProduct = (newProduct) => {
@@ -45,7 +60,7 @@ export const ProductsProvider = ({ children }) => {
 
  return (
   <ProductsContext.Provider
-   value={{ products, addProduct, filteredProducts, setFilter }}
+   value={{ products, addProduct, filteredProducts, setFilter, categories }}
   >
    {children}
   </ProductsContext.Provider>

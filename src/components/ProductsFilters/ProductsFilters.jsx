@@ -1,12 +1,14 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import PropTypes from "prop-types";
-import categories from "../../common/consts/categories";
+import { ProductsContext } from "../../context/ProductsContext";
 import commonColumnsStyles from "../../common/styles/Columns.module.scss";
 
 function ProductsFilters({ setFilter }) {
  const [nameFilter, setNameFilter] = useState("");
  const [categoryFilter, setCategoryFilter] = useState("");
  const [isFoodOnly, setIsFoodOnly] = useState(false);
+
+ const { categories } = useContext(ProductsContext);
 
  useEffect(() => {
   setFilter((prevFilter) => ({
